@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">IYshPWf1bn</property>
+  <property name="hibernate.connection.url">jdbc:mysql://remotemysql.com:3306/BtB9DLrhnQ</property>
+  <property name="hibernate.connection.username">BtB9DLrhnQ</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <!--  Echo the SQL to stdout  -->
+<property name="show_sql">true</property>
+  <property name="hibernate.current_session_context_class">thread</property>
+  <mapping class="entidades.Usuario"/>
+  <mapping class="entidades.Parqueadero"/>
+  <mapping class="entidades.Reserva"/>
+  <mapping class="entidades.Vehiculo"/>
+  <mapping class="entidades.Tarifa"/>
+  <mapping class="entidades.Movimiento"/>
+ </session-factory>
+</hibernate-configuration>

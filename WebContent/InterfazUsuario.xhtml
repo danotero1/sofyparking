@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsf/core"
+      xmlns:e="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Perfil de usuario</title>
+	<h:outputStylesheet library="css" name="style.css"/>
+<h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:growl id="messages"/>
+		
+		
+		<p:menubar>
+			<p:submenu label="#{ControladorUsuario.usuIniciaSesion.nombre}"  icon="pi pi-file">
+				
+				<p:menuitem value="Editar" action="#{ControladorUsuario.edit(ControladorUsuario.usuIniciaSesion)}"/>
+				
+				
+			</p:submenu>
+			
+	
+		
+		
+			<p:menuitem value="Reserva" action="#{Rutas.reserva()}"/>
+		
+			<p:submenu label="Historial"  icon="pi pi-file">
+				
+				<p:menuitem value="Reservas" action="#{Rutas.historialReservaUsuario()}"/>
+				<p:menuitem value="Movimientos" action="#{Rutas.historialMovimientosUsuario()}"/>
+				
+			</p:submenu>
+			<p:menuitem value="Mis Vehiculos"  action="#{Rutas.vehiculos()}" icon="pi pi-times"/>
+		
+		
+	
+		
+	
+		
+		
+	
+			<p:menuitem value="Logout" action="#{Rutas.salir()}" icon="pi pi-times"/>
+
+		
+		</p:menubar>
+	
+	
+	</h:form>
+	<br/>
+	<br/>
+	
+	<p:carousel autoPlayInterval="5500" numVisible="1" effect="easeInStrong" headerText="Información" style="margin-bottom:0">
+	 	
+        
+      
+        <p:tab title="Reservas">
+        	<div class="ui-g">
+        		<div class="ui-g-6">
+        			 <p:graphicImage style="width:500px" library="images" name="f1.jpg" />
+        		</div>
+        		<div class="ui-g-6">
+        		<br/>
+        		<br/>
+        		<br/>
+        			<h2 class="colorR"><b>Reservas</b></h2>
+        			<p>
+        				Maneja que clientes están interesados en tu parqueadero, filtra el correo del cliente que quiere salir o quiere 
+                		ingresar a tu parqueadero .
+                    
+        			</p>
+        		</div>
+        	
+        	</div>
+        
+        </p:tab>
+        <p:tab title="Vehiculos">
+        	<div class="ui-g">
+        		<div class="ui-g-6">
+        			 <p:graphicImage style="width:500px" library="images" name="f6.png" />
+        		</div>
+        		<div class="ui-g-6">
+        		<br/>
+        		<br/>
+        		<br/>
+        			<h2 class="colorR"><b>Vehiculos</b></h2>
+        			<p>
+        				Registra tu usuario con todas sus especificaciones 
+        				<ul>
+        					<li>Color</li>
+        					<li>Marca</li>
+        					<li>Modelo</li>
+        					<li>Placa</li>
+        				</ul>
+                    
+        			</p>
+        		</div>
+        	
+        	</div>
+        
+        </p:tab>
+        <p:tab title="Reportes">
+        	<div class="ui-g">
+        		<div class="ui-g-6">
+        			 <p:graphicImage style="width:500px" library="images" name="repo.png" />
+        		</div>
+        		<div class="ui-g-6">
+        		<br/>
+        		<br/>
+        		<br/>
+        			<h2 class="colorR"><b>Reportes</b></h2>
+        			<p>
+        				Obten una información detallada de tu parqueadero teniendo la facilidad de generar reportes con la información de tu parqueadero 
+                    
+        			</p>
+        		</div>
+        	
+        	</div>
+        
+            
+        </p:tab>
+    </p:carousel>
+	
+	<p:dialog header="Resumen De Reserva" widgetVar="dlg2" modal="true" height="100">
+		<h:outputText value="Parqueadero : " />
+	
+    	<h:outputText value="#{ControladorReserva.parqueadero.nombreParqueadero}" />
+    	<br/>
+    	<br/>
+    	<h:outputText value ="Ciudad : " />
+    	
+       	<h:outputText value="#{ControladorReserva.parqueadero.ciudad}" />
+       
+       	<p:separator />
+    	<h:outputText value="Fecha de Reserva : " />
+       	<h:outputText value="#{ControladorReserva.date}" />
+    	
+    	
+	</p:dialog>  
+</h:body>
+	
+	
+</html>

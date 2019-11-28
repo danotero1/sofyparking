@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+   	xmlns:c="http://xmlns.jcp.org/jsf/core"	
+    xmlns:e="http://java.sun.com/jsp/jstl/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Registrar Vehiculo</title>
+<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"></h:outputStylesheet>
+</h:head>
+<h:body>
+	<h:form>
+		<p:growl id="messages"/>
+		
+		
+		<p:menubar>
+			<p:submenu label="#{ControladorUsuario.usuIniciaSesion.nombre}"  icon="pi pi-file">
+				
+				<p:menuitem value="Editar" action="#{ControladorUsuario.edit(ControladorUsuario.usuIniciaSesion)}"/>
+				
+				
+			</p:submenu>
+			
+	
+		
+		
+			<p:menuitem value="Reserva" action="#{Rutas.reserva()}"/>
+			<p:submenu label="Historial"  icon="pi pi-file">
+				
+				<p:menuitem value="Reservas" action="#{Rutas.historialReservaUsuario()}"/>
+				<p:menuitem value="Movimientos" action="#{Rutas.historialMovimientosUsuario()}"/>
+				
+			</p:submenu>
+		
+			<p:menuitem value="Mis Vehiculos"  action="#{Rutas.vehiculos()}" icon="pi pi-times"/>
+		
+		
+	
+		
+	
+		
+		
+	
+			<p:menuitem value="Logout" action="#{Rutas.salir()}" icon="pi pi-times"/>
+
+		
+		</p:menubar>
+	
+	
+	</h:form>
+
+	<br/>
+	
+	<h:form>
+         
+    <p:panel header="Datos del vehiculo">
+                <p:messages />
+                <h:panelGrid columns="3" columnClasses="label, value">
+                    <h:outputText value="Placa *" />
+                    <p:inputText value="#{ControladorVehiculos.nuevoVehiculo.placa}" required="true" label="Firstname"/>
+                    
+                    <h:outputText value="" />
+                    
+                    
+                    <h:outputText value="Tipo: *" />
+ 
+ 					<p:selectOneMenu id="consoles" value="#{ControladorVehiculos.nuevoVehiculo.tipo}" style="width:125px" required="true">
+            
+			            <c:selectItem itemLabel="Carro" itemValue="Carro" />
+			            <c:selectItem itemLabel="Camioneta" itemValue="Camioneta" />
+			            <c:selectItem itemLabel="Moto" itemValue="Moto" />
+			            <c:selectItem itemLabel="Otro" itemValue="Otro" />
+			            <c:facet name="footer">
+			               <p:separator />
+			               <h:outputText value="4 consoles" style="font-weight:bold;"/>
+			            </c:facet>
+			        </p:selectOneMenu>
+ 				<!--  	
+                    <h:outputText value="Tipo: *" />
+                    <p:inputText value="#{ControladorVehiculos.nuevoVehiculo.tipo}" required="true" label="Lastname"/> -->	
+                    
+                    <h:outputText value="Marca: " />
+                    <p:inputText value="#{ControladorVehiculos.nuevoVehiculo.marca}" />
+                    <h:outputText value="" />
+                    
+ 
+                    <h:outputText value="Modelo: " />
+                    <p:inputText value="#{ControladorVehiculos.nuevoVehiculo.modelo}" />
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="Color: " />
+                    <p:inputText value="#{ControladorVehiculos.nuevoVehiculo.color}" />
+                    
+                    
+                </h:panelGrid>
+                <p:commandButton ajax="false" value="Registrar" action="#{ControladorVehiculos.add(ControladorUsuario.usuIniciaSesion)}"/>
+    </p:panel>
+    
+    
+ 
+</h:form>
+
+</h:body>
+</html>

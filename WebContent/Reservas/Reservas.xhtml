@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html  
+	 xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"></h:outputStylesheet>
+	
+    </h:head>
+ 	
+    <h:body>
+    
+   
+    <p:growl id="messages"/>
+ 
+  <h:form>
+		<p:growl id="messages"/>
+		
+		
+		<p:menubar>
+			<p:submenu label="#{ControladorUsuario.usuIniciaSesion.nombre}"  icon="pi pi-file">
+				
+				<p:menuitem value="Editar" action="#{ControladorUsuario.edit(ControladorUsuario.usuIniciaSesion)}"/>
+				
+				
+			</p:submenu>
+			
+	
+		
+		
+			<p:menuitem value="Reserva" action="#{Rutas.reserva()}"/>
+		
+			<p:submenu label="Historial"  icon="pi pi-file">
+				
+				<p:menuitem value="Reservas" action="#{Rutas.historialReservaUsuario()}"/>
+				<p:menuitem value="Movimientos" action="#{Rutas.historialMovimientosUsuario()}"/>
+				
+			</p:submenu>
+			<p:menuitem value="Mis Vehiculos"  action="#{Rutas.vehiculos()}" icon="pi pi-times"/>
+		
+		
+	
+		
+	
+		
+		
+	
+			<p:menuitem value="Logout" action="#{Rutas.salir()}" icon="pi pi-times"/>
+
+		
+		</p:menubar>
+	
+	
+	</h:form>
+	
+	<p:separator />
+ 
+ 
+	<p:panel id="basic" header="Reserva"  style="margin-bottom:90px">
+		<h:form>
+	
+		<div class="ui-g">
+			<div class="ui-g-6">
+				<p:graphicImage library="images" name="prub.jpg" />
+ 				<br/>
+				<h:outputText
+                value="Realiza reserva más rapido  de tu parqueadero favorito en el lugar que necesitas 
+                		
+                	." />
+			</div>
+			<div class="ui-g-2">
+			</div>
+			<div class="ui-g-4">
+					<h3 class="colorR">Consulta</h3>
+					<div class="ui-g-12 ui-md-4">
+		        		<div class="ui-inputgroup">
+		            	<span class="ui-inputgroup-addon"><i class="fa fa-car"></i></span>
+		            	<!-- <p:inputText placeholder="Ciudad" value="#{ControladorParqueadero.nuevoParqueadero.ciudad}" required="true" />--> 
+		            	
+		            	<p:selectOneMenu id="ciudaes" value="#{ControladorParqueadero.nuevoParqueadero.ciudad}" style="width:125px" required="true"	 >
+            
+			            	<c:selectItems value="#{ControladorParqueadero.ciudadesParqueaderos()}"/>
+			            	
+			            	
+	
+
+			        	</p:selectOneMenu>
+			        	
+		            	
+		            </div>
+		           
+		            <div class="ui-g-4">
+            		
+			        
+            		</div>
+            		<h5 class="colorR">Tipo de Parqueadero</h5>
+            		<p:selectOneMenu id="consoles" value="#{ControladorParqueadero.nuevoParqueadero.tipo}" style="width:125px" required="true"	 >
+            
+			            <c:selectItem itemLabel="Cubierto" itemValue="cubierto" />
+			            <c:selectItem itemLabel="SemiCubierto" itemValue="semi-cubierto" />
+			            <c:selectItem itemLabel="Descubierto" itemValue="descubierto" />
+			            <c:facet name="footer">
+			               <p:separator />
+			               <h:outputText value="3 consoles" style="font-weight:bold;"/>
+			            </c:facet>
+			        </p:selectOneMenu>
+			        <br/>
+			        <br/>
+		            <br/>
+		            <h5 class="colorR">Seleccione el vehiculo con el que desea hacer la reserva</h5>
+		              <p:selectOneMenu id="placas" value="#{ControladorVehiculos.vehiculoActual.placa}" style="width:125px" required="true"	 >
+            
+      						<c:selectItems value="#{ControladorVehiculos.vehiculosUsuarioString(ControladorUsuario.usuIniciaSesion)}"/>
+
+						</p:selectOneMenu>
+			        <br/>
+			        <br/>
+			        <p:commandButton ajax="false" value="Consultar" action="#{ControladorParqueadero.filtrarParqueadero()}"/>
+		        </div>
+		    </div>
+			</div>
+			
+			</h:form>  
+		
+		<p:separator />
+		
+		
+	
+		<h:form id="form">
+    <p:repeat value="#{ControladorReserva.ReservasActivasDelUsuario(ControladorUsuario.usuIniciaSesion)}" var="res">
+    
+        <h:panelGrid columns="1" style="width:100%" columnClasses="logo,detail">
+ 
+            <p:outputPanel>
+                <p:panel id="toggleable" header="#{res.nombreParqueadero}" toggleable="false" closable="false" toggleSpeed="500"  widgetVar="panel" style="margin-bottom:50px">
+            
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="Vehiculo Reservado :" />
+                    <h:outputText value="#{res.placa}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Servicio:" />
+                    <h:outputText value="#{res.tipoServicio}" style="font-weight: bold"/>
+                    
+                    <h:outputText value="Tipo de Parqueadero:" />
+                    <h:outputText value="#{res.tipoParqueadero}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Fecha de Reserva:" />
+                    <h:outputText value="#{res.fechaHoraReserva}" style="font-weight: bold"/>
+                    
+                </h:panelGrid>
+                <p:commandButton  ajax="false" value="Cancelar Reserva" action="#{ControladorReserva.desactivarReserva(res)}"/>
+                
+                </p:panel>
+            </p:outputPanel>
+        </h:panelGrid>
+        
+       
+    </p:repeat>
+    </h:form>  
+
+   
+       
+    </p:panel>
+	
+	
+    </h:body>
+    
+</html>

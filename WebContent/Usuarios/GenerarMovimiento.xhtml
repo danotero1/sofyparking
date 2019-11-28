@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+   	xmlns:c="http://xmlns.jcp.org/jsf/core"	
+    xmlns:e="http://java.sun.com/jsp/jstl/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Registrar Parqueadero</title>
+</h:head>
+<h:body>
+<h:form>
+		<p:growl id="messages"/>
+		
+		
+		<p:menubar>
+			<p:submenu label="#{ControladorUsuario.usuIniciaSesion.nombre}"  icon="pi pi-file">
+				
+				<p:menuitem value="Editar" action="#{ControladorUsuario.edit(ControladorUsuario.usuIniciaSesion)}"/>
+				
+				
+			</p:submenu>
+			
+	
+		
+			<p:menuitem value="Parqueaderos" action= "Parqueaderos" icon="pi pi-times"/>	
+			<p:menuitem value="Reserva" action="#{ControladorReserva.abrirDialogoDeReservas()}" icon="pi pi-times"/>
+		
+			<p:menuitem value="Historial" icon="pi pi-times"/>
+			
+		
+		
+		
+		<p:submenu label="Usuarios" icon="pi pi-question">
+			<p:menuitem value="Clientes" action="Usuarios" />
+			<p:menuitem value="Admin" action="UsuariosAdmin"/>	
+		</p:submenu>
+		
+		<p:submenu label="Actions" icon="pi pi-cog">
+			<p:submenu label="Ajax" icon="pi pi-refresh">
+				<p:menuitem value="Save"  icon="pi pi-save" />
+				<p:menuitem value="Update"  icon="pi pi-refresh" />
+			</p:submenu>
+			<p:submenu label="Non-Ajax" icon="pi pi-refresh">
+				<p:menuitem value="Delete"  icon="pi pi-times"  ajax="false"/>
+			</p:submenu>
+		</p:submenu>
+		
+		
+	
+			<p:menuitem value="Logout" action="index" icon="pi pi-times"/>
+
+		
+		</p:menubar>
+	
+	
+	</h:form>
+	<br/>
+	
+	<h:form>
+         
+    <p:panel header="Datos del Movimiento">
+                <p:messages />
+                
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Nombre Del parqueadero : " />
+                    <h:outputText value="#{ControladorReserva.reservaActual.nombreParqueadero}"/>
+                    
+                     <h:outputText value="Tipo de Parqueadero: " />
+                    <h:outputText value="#{ControladorReserva.reservaActual.tipoParqueadero}" />
+ 
+                    <h:outputText value="Correo Usuario: " />
+                    <h:outputText value="#{ControladorReserva.reservaActual.correoUsuario}" />
+                    
+                    <h:outputText value="Placa de Vehiculo: " />
+                    <h:outputText value="#{ControladorReserva.reservaActual.placa}" />
+                    
+                    <h:outputText value="Hora de Reserva : " />
+                    <h:outputText value="#{ControladorReserva.reservaActual.fechaHoraReserva}" />
+ 
+                    <h:outputText value="Tipo de cobro: " />
+                    <h:outputText value="#{ControladorReserva.reservaActual.tipoCobro}" />
+
+                </h:panelGrid>
+                 
+                <p:commandButton ajax="false" value="Generar Movimiento" action="#{ControladorMovimiento.add(ControladorReserva.reservaActual)}"/>
+                 
+    </p:panel>
+    </h:form>
+
+</h:body>
+</html>

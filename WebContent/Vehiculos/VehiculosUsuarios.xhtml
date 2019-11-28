@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+   	xmlns:c="http://xmlns.jcp.org/jsf/core"	
+    xmlns:e="http://java.sun.com/jsp/jstl/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Mis Vehiculos</title>
+<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"></h:outputStylesheet>
+</h:head>
+<h:body>
+<h:form>
+		<p:growl id="messages"/>
+		
+		
+		<p:menubar>
+			<p:submenu label="#{ControladorUsuario.usuIniciaSesion.nombre}"  icon="pi pi-file">
+				
+				<p:menuitem value="Editar" action="#{ControladorUsuario.edit(ControladorUsuario.usuIniciaSesion)}"/>
+				
+				
+			</p:submenu>
+			
+	
+		
+				
+			<p:menuitem value="Reserva" action="#{Rutas.reserva()}" icon="pi pi-times"/>
+		
+			<p:menuitem value="Historial" icon="pi pi-times"/>
+			<p:menuitem value="Mis Vehiculos"  action="#{Rutas.vehiculos()}" icon="pi pi-times"/>
+		
+
+	
+		
+		
+	
+			<p:menuitem value="Logout" action="#{Rutas.salir()}" icon="pi pi-times"/>
+
+		
+		</p:menubar>
+	
+	
+	</h:form>
+	
+         <br/>
+   <h:form>
+    <p:panel header="Vehiculos">
+    	<p:commandButton value="Agregar Vehiculo" action="RegistroVehiculo"  icon="pi pi-star" style="margin-right:20px;"/>
+
+    	<p:dataTable var="veh" value="#{ControladorVehiculos.vehiculosDelUsuario(ControladorUsuario.usuIniciaSesion.correo)}">
+		    <p:column headerText="placa">
+		        <h:outputText value="#{veh.placa}" />
+		    </p:column>
+		 
+		    <p:column headerText="Tipo">
+		        <h:outputText value="#{veh.tipo}" />
+		    </p:column>
+		    <p:column headerText="Marca">
+		        <h:outputText value="#{veh.marca}" />
+		    </p:column>
+		    <p:column headerText="Modelo">
+		        <h:outputText value="#{veh.modelo}" />
+		    </p:column>
+		    <p:column headerText="Color">
+		        <h:outputText value="#{veh.color}" />
+		    </p:column>
+		    <p:column headerText="Editar">
+		       <p:commandButton ajax="false" value="v" action="#{ControladorVehiculos.edit(veh)}"/>
+		    </p:column>
+		 
+		   
+		</p:dataTable>
+                
+    </p:panel>
+    
+    
+ 
+</h:form>
+
+</h:body>
+</html>
